@@ -5,6 +5,24 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="../assets/css/main.css" />
+        <style>
+            pre {
+                background-color: #f4f4f4;
+                padding: 10px;
+                border-left: 4px solid #3498db;
+                overflow-x: auto;
+            }
+            code {
+                font-family: Consolas, monospace;
+            }
+            p {
+                margin-bottom: 1em;
+            }
+            h3 {
+                margin-top: 1.5em;
+                color: #2c3e50;
+            }
+        </style>
     </head>
     <body class="is-preload">
 
@@ -37,9 +55,138 @@
                         <header class="main">
                             <h2>Enhancement Two: Predictive Weight Trend</h2>
                         </header>
-                    </section>
 
-                    <!-- Main content intentionally left blank -->
+                        <!-- Main content -->
+                        <div class="content">
+
+                            <h3>Artifact Description</h3>
+                            <p>
+                                My second enhancement adds a <strong>predictive weight trend</strong> feature to my weight-tracking application from CS360. 
+                                Using a <strong>7-day moving-average algorithm</strong>, the app analyzes the user’s latest week of recorded weights, 
+                                smooths the data, and projects the likely trend for the coming week. This predictive logic is presented both 
+                                <strong>textually</strong> and <strong>visually</strong>.
+                            </p>
+                            <p>
+                                The chart shows historical entries as a solid blue line and predicted weights as a dotted green line, giving users a clear 
+                                view of their progress and where they may be headed if current habits continue. For example, a textual summary informs 
+                                the user that they averaged <strong>148.1 lbs.</strong> this week, with a projected <strong>146.3 lbs.</strong> next week. 
+                                This enhancement transformed the simple tracking app into a <strong>knowledge-based tool</strong>, adding actionable insights for users.
+                            </p>
+
+                            <h3>Algorithmic Implementation</h3>
+                            <p>
+                                The enhancement relies on two main steps: computing a moving average of recent weights and determining the <strong>daily slope</strong> 
+                                to predict short-term trends.
+                            </p>
+                            <pre><code>int weekLength = Math.min(MOVING_WINDOW, weights.size());
+float thisWeekAvg = 0;
+
+for (int i = weights.size() - weekLength; i < weights.size(); i++) {
+    thisWeekAvg += weights.get(i);
+}
+thisWeekAvg /= weekLength;
+
+float totalChange = 0;
+
+for (int i = weights.size() - weekLength; i < weights.size() - 1; i++) {
+    float dailyChange = weights.get(i + 1) - weights.get(i);
+    dailyChange = Math.max(Math.min(dailyChange, MAX_DAILY_CHANGE), -MAX_DAILY_CHANGE);
+    totalChange += dailyChange;
+}
+
+float dailySlope = totalChange / (weekLength - 1);</code></pre>
+
+                            <h3>Prediction of Next Week</h3>
+                            <p>
+                                After calculating the slope, the app generates <strong>predicted weights for the next 7 days</strong>:
+                            </p>
+                            <pre><code>float lastWeight = weights.get(weights.size() - 1);
+
+SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+Date lastDate = null;
+try {
+    lastDate = sdf.parse(dateLabels.get(dateLabels.size() - 1));
+} catch (ParseException e) {
+    e.printStackTrace();
+    lastDate = new Date();
+}
+
+Calendar calendar = Calendar.getInstance();
+calendar.setTime(lastDate);
+
+Random random = new Random();
+float fluctuationRange = 0.5f;
+
+for (int i = 1; i <= 7; i++) {
+    lastWeight += dailySlope;
+    float noise = (random.nextFloat() * 2 - 1) * fluctuationRange;
+    float predictedWeight = lastWeight + noise;
+    predictedEntries.add(new Entry(weights.size() - 1 + i, predictedWeight));
+    
+    calendar.add(Calendar.DATE, 1);
+    String nextDateStr = sdf.format(calendar.getTime());
+    chartLabels.add(nextDateStr);
+}</code></pre>
+
+                            <h3>Visualization</h3>
+                            <p>
+                                The predicted and historical data are visualized using <strong>MPAndroidChart</strong>, with clear distinctions between actual and predicted values:
+                            </p>
+                            <pre><code>LineDataSet actualSet = new LineDataSet(actualEntries, "actual weight");
+actualSet.setColor(getResources().getColor(R.color.blueActual));
+actualSet.setCircleColor(getResources().getColor(R.color.blueActual));
+actualSet.setLineWidth(2f);
+actualSet.setCircleRadius(4f);
+actualSet.setDrawValues(false);
+
+LineDataSet predictedSet = new LineDataSet(predictedEntries, "predicted trend");
+predictedSet.setColor(getResources().getColor(R.color.greenPredicted));
+predictedSet.enableDashedLine(10f, 5f, 0f);
+predictedSet.setLineWidth(2f);
+predictedSet.setCircleRadius(3f);
+predictedSet.setDrawValues(false);
+
+LineData lineData = new LineData(actualSet, predictedSet);
+predictionChart.setData(lineData);
+
+predictionChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(chartLabels));
+predictionChart.getXAxis().setGranularity(1f);
+predictionChart.getXAxis().setLabelRotationAngle(-45);
+predictionChart.getAxisRight().setEnabled(false);
+predictionChart.getDescription().setEnabled(false);
+predictionChart.animateX(500);
+predictionChart.invalidate();
+
+Legend legend = predictionChart.getLegend();
+legend.setTextSize(12f);
+legend.setForm(Legend.LegendForm.LINE);</code></pre>
+
+                            <h3>User Feedback</h3>
+                            <p>To complement the visual chart, the app provides a concise textual summary:</p>
+                            <pre><code>String message = "this week you averaged " + String.format("%.1f", thisWeekAvg) +
+                 " lbs. based on your trend, next week you are likely to hit " +
+                 String.format("%.1f", nextWeekAvg) + " lbs.";
+predictionText.setText(message);</code></pre>
+
+                            <h3>Justification for Inclusion</h3>
+                            <p>
+                                This enhancement demonstrates my ability to <strong>design and implement algorithmic solutions</strong> for real-world problems. 
+                                The moving-average calculation, slope extraction, and prediction modeling highlight my knowledge of <strong>algorithms, 
+                                time-complexity considerations, and data handling</strong>. Integrating this data into a dynamic chart showcases my skill in 
+                                <strong>transforming complex datasets into intuitive visualizations</strong>.
+                            </p>
+
+                            <h3>Reflection</h3>
+                            <p>
+                                During development, I compared <strong>linear regression</strong> and the moving-average method. Linear regression had higher 
+                                computational overhead, whereas the moving-average approach provided smooth, responsive predictions with minimal complexity. 
+                                Visual clarity of the chart was another challenge, requiring careful selection of <strong>line styles, colors, and labels</strong> 
+                                to differentiate historical and predicted values. This project enhanced my abilities in <strong>algorithm testing, data visualization, 
+                                and creating user-friendly computing solutions</strong> that are technically sound and practically useful.
+                            </p>
+
+                        </div>
+                    </section>
 
                 </div>
             </div>
