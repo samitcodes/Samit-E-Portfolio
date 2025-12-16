@@ -65,21 +65,21 @@
 
                     <h3>Artifact Description</h3>
                     <p>
-                        My second enhancement adds a <strong>predictive weight trend</strong> feature to my weight-tracking application from CS360. 
-                        Using a <strong>7-day moving-average algorithm</strong>, the app analyzes the user’s latest week of recorded weights, 
+                        My second enhancement adds a predictive weight trend feature to my weight-tracking application from CS360. 
+                        Using a 7-day moving-average algorithm, the app analyzes the user’s latest week of recorded weights, 
                         smooths the data, and projects the likely trend for the coming week. This predictive logic is presented both 
-                        <strong>textually</strong> and <strong>visually</strong>.
+                        textually and visually.
                     </p>
                     <p>
                         The chart shows historical entries as a solid blue line and predicted weights as a dotted green line, giving users a clear 
                         view of their progress and where they may be headed if current habits continue. For example, a textual summary informs 
-                        the user that they averaged <strong>148.1 lbs.</strong> this week, with a projected <strong>146.3 lbs.</strong> next week. 
-                        This enhancement transformed the simple tracking app into a <strong>knowledge-based tool</strong>, adding actionable insights for users.
+                        the user that they averaged <i>148.1 lbs.</i> this week, with a projected <i>146.3 lbs.</i> next week. 
+                        This enhancement transformed the simple tracking app into a knowledge-based tool, adding actionable insights for users.
                     </p>
 
                     <h3>Algorithmic Implementation</h3>
                     <p>
-                        The enhancement relies on two main steps: computing a moving average of recent weights and determining the <strong>daily slope</strong> 
+                        The enhancement relies on two main steps: computing a moving average of recent weights and determining the daily slope 
                         to predict short-term trends.
                     </p>
                     <pre><code class="language-java">int weekLength = Math.min(MOVING_WINDOW, weights.size());
@@ -102,7 +102,7 @@ float dailySlope = totalChange / (weekLength - 1);</code></pre>
 
                     <h3>Prediction of Next Week</h3>
                     <p>
-                        After calculating the slope, the app generates <strong>predicted weights for the next 7 days</strong>:
+                        After calculating the slope, the app generates predicted weights for the next 7 day:
                     </p>
                     <pre><code class="language-java">float lastWeight = weights.get(weights.size() - 1);
 
@@ -174,19 +174,19 @@ predictionText.setText(message);</code></pre>
 
                     <h3>Justification for Inclusion</h3>
                     <p>
-                        This enhancement demonstrates my ability to <strong>design and implement algorithmic solutions</strong> for real-world problems. 
-                        The moving-average calculation, slope extraction, and prediction modeling highlight my knowledge of <strong>algorithms, 
-                        time-complexity considerations, and data handling</strong>. Integrating this data into a dynamic chart showcases my skill in 
-                        <strong>transforming complex datasets into intuitive visualizations</strong>.
+                        This enhancement demonstrates my ability to design and implement algorithmic solutions for real-world problems. 
+                        The moving-average calculation, slope extraction, and prediction modeling highlight my knowledge of algorithms, 
+                        time-complexity considerations, and data handling. Integrating this data into a dynamic chart showcases my skill in 
+                        transforming complex datasets into intuitive visualizations.
                     </p>
 
                     <h3>Reflection</h3>
                     <p>
-                        During development, I compared <strong>linear regression</strong> and the moving-average method. Linear regression had higher 
+                        During development, I compared linear regression and the moving-average method. Linear regression had higher 
                         computational overhead, whereas the moving-average approach provided smooth, responsive predictions with minimal complexity. 
-                        Visual clarity of the chart was another challenge, requiring careful selection of <strong>line styles, colors, and labels</strong> 
-                        to differentiate historical and predicted values. This project enhanced my abilities in <strong>algorithm testing, data visualization, 
-                        and creating user-friendly computing solutions</strong> that are technically sound and practically useful.
+                        Visual clarity of the chart was another challenge, requiring careful selection of line styles, colors, and label
+                        to differentiate historical and predicted values. This project enhanced my abilities in algorithm testing, data visualization, 
+                        and creating user-friendly computing solutions that are technically sound and practically useful.
                     </p>
 
                 </div>
