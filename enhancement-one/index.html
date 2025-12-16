@@ -43,43 +43,74 @@
                 </p>
 
                 <p>
-                    The following snippet demonstrates how I prepared and bound the dataset to the chart using MPAndroidChart, 
-                    enabling real-time visualization of user weight entries:
+                    The `loadGrid()` method is central to this enhancement, as it retrieves weight entries from the database, 
+                    updates the GridView, and plots the weight trend graph using MPAndroidChart. This method demonstrates 
+                    my skills in data handling, UI updates, and chart integration:
                 </p>
 
                 <pre><code class="language-java">
-// Prepare data entries for the chart
-ArrayList<Entry> entries = new ArrayList<>();
-for (int i = 0; i < weights.size(); i++) {
-    entries.add(new Entry(i, (float) weights.get(i)));
+private void loadGrid() {
+    Cursor cursor = db.getWeightsByUser(userId); // fetch weights
+    ArrayList<String> data = new ArrayList<>();
+    weightIds.clear();
+    dateLabels.clear();
+    ArrayList<Entry> entries = new ArrayList<>();
+    int index = 0;
+
+    while (cursor.moveToNext()) {
+        int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+        String date = cursor.getString(cursor.getColumnIndexOrThrow("date"));
+        double weight = cursor.getDouble(cursor.getColumnIndexOrThrow("weight"));
+
+        data.add(date + ": " + weight + " lbs"); // GridView display text
+        weightIds.add(id); // store DB ID for update/delete
+        entries.add(new Entry(index, (float) weight)); // chart data point
+        dateLabels.add(date); // chart X-axis label
+        index++;
+    }
+    cursor.close(); // prevent memory leaks
+
+    gridView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data));
+
+    if (!entries.isEmpty()) {
+        LineDataSet dataSet = new LineDataSet(entries, "Weight Progress");
+        dataSet.setColor(getResources().getColor(R.color.purple_500));
+        dataSet.setValueTextColor(getResources().getColor(R.color.black));
+        dataSet.setLineWidth(2f);
+        dataSet.setCircleRadius(4f);
+        dataSet.setCircleColor(getResources().getColor(R.color.purple_700));
+        dataSet.setDrawValues(true);
+
+        LineData lineData = new LineData(dataSet);
+        weightChart.setData(lineData);
+
+        XAxis xAxis = weightChart.getXAxis();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(dateLabels));
+        xAxis.setGranularity(1f);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setLabelRotationAngle(-45);
+
+        weightChart.getAxisRight().setEnabled(false);
+        weightChart.getDescription().setEnabled(false);
+        weightChart.animateX(500);
+        weightChart.invalidate();
+    }
 }
-
-// Create and style the dataset
-LineDataSet dataSet = new LineDataSet(entries, "Weight Progress");
-dataSet.setColor(getResources().getColor(R.color.purple_500));
-dataSet.setLineWidth(2f);
-dataSet.setCircleRadius(4f);
-
-// Bind data to the chart and refresh
-LineData lineData = new LineData(dataSet);
-weightChart.setData(lineData);
-weightChart.invalidate();
                 </code></pre>
 
                 <p>
-                    This enhancement required addressing several challenges, including ensuring real-time updates 
-                    as new weight entries were added, formatting X-axis labels for readability, and overcoming initial 
-                    incompatibility issues with Chart.js. Through independent research, iterative testing, and consultation 
-                    of MPAndroidChart documentation, I successfully integrated the chart, creating a responsive and user-friendly interface. 
-                    Peer feedback during testing helped refine the graph’s clarity and overall usability.
+                    By implementing this method, I learned how to efficiently connect database operations with real-time 
+                    UI updates and create a visual representation of data that enhances user experience. Challenges included 
+                    synchronizing the chart with data updates, formatting labels for readability, and ensuring smooth animation, 
+                    all of which strengthened my problem-solving and technical skills.
                 </p>
 
                 <p>
-                    Through this process, I strengthened my skills in data visualization, UI design, integration of external libraries, 
-                    and problem-solving. The enhancement allowed me to fully meet course outcomes related to professional communication 
-                    through visual and technical forms and the application of new methods and technologies to solve computing problems. 
-                    While some outcomes, such as advanced algorithmic analysis, remain to be addressed in future enhancements, this artifact 
-                    demonstrates my ability to independently learn new tools, apply them practically, and add meaningful value to a software application.
+                    This enhancement allowed me to fully meet course outcomes related to professional communication 
+                    through visual and technical forms, as well as the application of new methods and technologies to 
+                    solve computing problems. Other outcomes, such as advanced algorithmic analysis, remain to be addressed 
+                    in future enhancements. Overall, this artifact demonstrates my ability to independently learn new tools, 
+                    apply them practically, and add meaningful value to a software application.
                 </p>
 
             </section>
