@@ -1,26 +1,64 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license
+-->
+<html>
 <head>
-    <title>Code Review</title>
+    <title>Samit Datta E-Portfolio</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
     <style>
-        /* Responsive video container */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            max-width: 100%;
+        /* Enhancement Section Styling */
+        .enhancement-section {
+            background-color: #f9f9f9; /* Light grey background */
+            border-radius: 12px;       /* Rounded corners */
+            padding: 30px 20px;        /* Inner spacing */
+            margin-bottom: 40px;       /* Space between sections */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .enhancement-section:hover {
+            transform: translateY(-5px); /* Lift effect */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .enhancement-section .icon {
+            font-size: 40px;
+            color: #007bff; /* Primary blue icon color */
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .enhancement-section h3 a {
+            color: #111;
+            text-decoration: none;
+        }
+
+        .enhancement-section h3 a:hover {
+            color: #007bff;
+        }
+
+        .enhancement-section p {
+            color: #333;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .enhancement-section .button {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 6px;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .enhancement-section .button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -30,52 +68,104 @@
     <!-- Wrapper -->
     <div id="wrapper">
 
-        <!-- Main Content -->
+        <!-- Main -->
         <div id="main">
             <div class="inner">
 
                 <!-- Header -->
                 <header id="header">
-                    <a href="../index.html" class="logo">
-                        <strong>Samit Datta</strong>
-                    </a>
+                    <a href="index.html" class="logo"><strong>Samit Datta</strong></a>
                     <ul class="icons">
                         <li>
-                            <a href="https://github.com/samitcodes"
-                               class="icon brands fa-github"
-                               target="_blank">
+                            <a href="https://github.com/samitcodes" class="icon brands fa-github" target="_blank">
                                 <span class="label">GitHub</span>
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.linkedin.com/in/samitdattaofficial/"
-                               class="icon brands fa-linkedin"
-                               target="_blank">
+                            <a href="https://www.linkedin.com/in/samitdattaofficial/" class="icon brands fa-linkedin" target="_blank">
                                 <span class="label">LinkedIn</span>
                             </a>
                         </li>
                     </ul>
                 </header>
 
-                <!-- Code Review Section -->
-                <section>
-                    <header class="main">
-                        <h2>Code Review</h2>
-                    </header>
+                <!-- Banner -->
+                <section id="banner">
+                    <div class="content" style="color: #111;">
+                        <header>
+                            <h1>Welcome to my ePortfolio</h1>
+                        </header>
 
-                    <p>
-                        This video provides a detailed walkthrough and code review of Enhancement One,
-                        explaining design decisions, implementation details, and improvements made
-                        to ensure scalability, readability, and maintainability.
-                    </p>
+                        <p>
+                            Hey there, my name is Samit Datta and I'm from NYC.
+                        </p>
 
-                    <!-- Embedded Local Video -->
-                    <div class="video-container">
-                        <video controls preload="metadata">
-                            <source src="../videos/Samit Datta Code Review.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
+                        <p>
+                            From a young age, I’ve been driven by a passion for technology and a curiosity
+                            for how software shapes the world around us. What began as childhood
+                            experimentation with computers and simple programs grew into a clear ambition
+                            to become a software engineer.
+                        </p>
+
+                        <p>
+                            Over the years, I’ve transformed that early interest into real-world experience
+                            such as working as a web developer, mentoring students as a Python tutor, and
+                            gaining hands-on industry exposure as a software engineering intern. These
+                            opportunities have strengthened my technical foundation, problem-solving
+                            mindset, and dedication to creating meaningful, user-focused solutions.
+                        </p>
+
+                        <p>
+                            I hope the skills and growth I’ve developed throughout this journey are
+                            reflected throughout this ePortfolio.
+                        </p>
                     </div>
+
+                    <span class="image object">
+                        <img src="images/Samit Datta Headshot.JPG" alt="Samit Datta Headshot" />
+                    </span>
+                </section>
+
+                <!-- Enhancement One -->
+                <section class="enhancement-section">
+                    <article>
+                        <span class="icon fa-chart-line"></span>
+                        <div class="content">
+                            <h3><a href="enhancement-one/index.html">Enhancement One</a></h3>
+                            <p>Weight Trend Graph: Visualize your weight trends over time with interactive graphs.</p>
+                            <ul class="actions">
+                                <li><a href="enhancement-one/index.html" class="button">View Enhancement</a></li>
+                            </ul>
+                        </div>
+                    </article>
+                </section>
+
+                <!-- Enhancement Two -->
+                <section class="enhancement-section">
+                    <article>
+                        <span class="icon fa-brain"></span>
+                        <div class="content">
+                            <h3><a href="enhancement-two/index.html">Enhancement Two</a></h3>
+                            <p>Predictive Weight Trend Algorithm: Uses data-driven modeling to forecast future weight trends based on past data.</p>
+                            <ul class="actions">
+                                <li><a href="enhancement-two/index.html" class="button">View Enhancement</a></li>
+                            </ul>
+                        </div>
+                    </article>
+                </section>
+
+                <!-- Enhancement Three -->
+                <section class="enhancement-section">
+                    <article>
+                        <span class="icon fa-shield-alt"></span>
+                        <div class="content">
+                            <h3><a href="enhancement-three/index.html">Enhancement Three</a></h3>
+                            <p>Safe Delete / Backup History: Ensures deleted data can be safely backed up and restored to prevent accidental loss.</p>
+                            <ul class="actions">
+                                <li><a href="enhancement-three/index.html" class="button">View Enhancement</a></li>
+                            </ul>
+                        </div>
+                    </article>
                 </section>
 
             </div>
@@ -91,14 +181,21 @@
                         <h2>Menu</h2>
                     </header>
                     <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="../codereview/">Code Review</a></li>
-                        <li><a href="../enhancement-one/">Enhancement One</a></li>
-                        <li><a href="../enhancement-two/">Enhancement Two</a></li>
-                        <li><a href="../enhancement-three/">Enhancement Three</a></li>
-                        <li><a href="../conclusion/">Conclusion</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="codereview/">Code Review</a></li>
+                        <li><a href="enhancement-one/">Enhancement One</a></li>
+                        <li><a href="enhancement-two/">Enhancement Two</a></li>
+                        <li><a href="enhancement-three/">Enhancement Three</a></li>
+                        <li><a href="conclusion/">Conclusion</a></li>
                     </ul>
                 </nav>
+
+                <!-- Footer -->
+                <footer id="footer">
+                    <p class="copyright">
+                        &copy; Samit Datta. Design: <a href="https://html5up.net">HTML5 UP</a>.
+                    </p>
+                </footer>
 
             </div>
         </div>
@@ -106,11 +203,11 @@
     </div>
 
     <!-- Scripts -->
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/js/browser.min.js"></script>
-    <script src="../assets/js/breakpoints.min.js"></script>
-    <script src="../assets/js/util.js"></script>
-    <script src="../assets/js/main.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
 
 </body>
 </html>
