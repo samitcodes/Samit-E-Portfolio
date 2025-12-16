@@ -5,6 +5,20 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="../assets/css/main.css" />
+        <style>
+            pre {
+                background: #f4f4f4;
+                padding: 1em;
+                overflow-x: auto;
+                border-radius: 6px;
+            }
+            code {
+                font-family: Consolas, monospace;
+            }
+            section {
+                margin-bottom: 3em;
+            }
+        </style>
     </head>
     <body class="is-preload">
 
@@ -39,7 +53,159 @@
                         </header>
                     </section>
 
-                    <!-- Main content intentionally left blank -->
+                    <!-- Artifact Description -->
+                    <section>
+                        <h3>Artifact Description</h3>
+                        <p>
+                            In continuation of my Weight Tracker application originally developed in CS-360,
+                            my third enhancement introduces a <strong>safe-delete backup history system</strong>.
+                            This enhancement implements a soft-deletion process that prevents irreversible
+                            removal of user accounts and weight records. Instead of permanently deleting data,
+                            the system marks records as inactive using a deletion flag, restricting access while
+                            preserving the original data.
+                        </p>
+                        <p>
+                            When a user deletes an account, the system disables access to that account and hides
+                            its associated records from active queries, but the information remains intact within
+                            the database. This enhancement demonstrates secure data lifecycle management and
+                            responsible database design.
+                        </p>
+                    </section>
+
+                    <!-- Database Versioning -->
+                    <section>
+                        <h3>Database Versioning and Schema Evolution</h3>
+                        <p>
+                            To safely introduce soft-delete functionality, the database version was incremented
+                            and schema changes were applied using controlled upgrades.
+                        </p>
+                        <pre><code>private static final int DATABASE_VERSION = 2;
+// Incremented to support soft-delete functionality</code></pre>
+
+                        <pre><code>@Override
+public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    if (oldVersion < 2) {
+        db.execSQL("ALTER TABLE users ADD COLUMN is_deleted INTEGER DEFAULT 0");
+        db.execSQL("ALTER TABLE weights ADD COLUMN is_deleted INTEGER DEFAULT 0");
+    }
+}</code></pre>
+                    </section>
+
+                    <!-- Justification -->
+                    <section>
+                        <h3>Justification for Inclusion</h3>
+                        <p>
+                            This artifact was selected under the databases category because health-related
+                            data requires a higher level of security and responsibility. Weight records are
+                            personal and confidential, making confidentiality, integrity, and availability
+                            critical concerns.
+                        </p>
+                        <p>
+                            This enhancement demonstrates that databases are not merely storage mechanisms,
+                            but active components responsible for enforcing logic, preventing invalid
+                            operations, and protecting user data from loss or corruption.
+                        </p>
+                    </section>
+
+                    <!-- Table Design -->
+                    <section>
+                        <h3>Soft-Delete Table Design</h3>
+                        <p>
+                            The weights table includes an <code>is_deleted</code> flag to support
+                            non-destructive deletion while maintaining relational integrity.
+                        </p>
+                        <pre><code>String createWeights = "CREATE TABLE weights (" +
+        "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        "user_id INTEGER, " +
+        "date TEXT, " +
+        "weight REAL, " +
+        "is_deleted INTEGER DEFAULT 0, " +
+        "FOREIGN KEY(user_id) REFERENCES users(id))";</code></pre>
+                    </section>
+
+                    <!-- Soft Delete Logic -->
+                    <section>
+                        <h3>Safe Delete Logic</h3>
+                        <p>
+                            Instead of permanently deleting records, the application marks them as inactive
+                            using a soft-delete strategy.
+                        </p>
+                        <pre><code>public boolean softDeleteWeight(int id, int userId) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    ContentValues cv = new ContentValues();
+    cv.put("is_deleted", 1);
+
+    int result = db.update(
+            TABLE_WEIGHTS,
+            cv,
+            "id=? AND user_id=?",
+            new String[]{String.valueOf(id), String.valueOf(userId)}
+    );
+    return result > 0;
+}</code></pre>
+                    </section>
+
+                    <!-- Query Filtering -->
+                    <section>
+                        <h3>Query Filtering for Active Records</h3>
+                        <p>
+                            All user-facing queries explicitly filter out deleted records to prevent
+                            unauthorized access to inactive data.
+                        </p>
+                        <pre><code>public Cursor getWeightsByUser(int userId) {
+    SQLiteDatabase db = this.getReadableDatabase();
+    return db.rawQuery(
+            "SELECT * FROM weights WHERE user_id=? AND is_deleted=0",
+            new String[]{String.valueOf(userId)}
+    );
+}</code></pre>
+                    </section>
+
+                    <!-- Recovery -->
+                    <section>
+                        <h3>Data Recovery (Undo Delete)</h3>
+                        <p>
+                            Deleted records can be restored instantly by resetting the deletion flag.
+                        </p>
+                        <pre><code>public boolean recoverWeight(int id, int userId) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    ContentValues cv = new ContentValues();
+    cv.put("is_deleted", 0);
+
+    int result = db.update(
+            TABLE_WEIGHTS,
+            cv,
+            "id=? AND user_id=?",
+            new String[]{String.valueOf(id), String.valueOf(userId)}
+    );
+    return result > 0;
+}</code></pre>
+                    </section>
+
+                    <!-- Course Outcomes -->
+                    <section>
+                        <h3>Course Outcomes Assessment</h3>
+                        <p>
+                            This enhancement met the planned course outcomes by applying database concepts
+                            to implement secure data management practices and system-level safeguards.
+                        </p>
+                    </section>
+
+                    <!-- Reflection -->
+                    <section>
+                        <h3>Reflection</h3>
+                        <p>
+                            Initially, I considered implementing a secondary database as a backup solution.
+                            However, maintaining synchronization across multiple databases introduced
+                            unnecessary complexity and risk. The soft-delete approach provided a safer and
+                            more efficient alternative.
+                        </p>
+                        <p>
+                            This enhancement reinforced the importance of thoughtful database design and
+                            showed that simple, well-structured solutions often provide stronger security
+                            and reliability than complex redundancy mechanisms.
+                        </p>
+                    </section>
 
                 </div>
             </div>
