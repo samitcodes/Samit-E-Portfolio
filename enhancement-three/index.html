@@ -18,6 +18,15 @@
             section {
                 margin-bottom: 3em;
             }
+            /* Remove section divider lines from headers */
+            header.main {
+                border-bottom: none !important;
+            }
+            header.major > h2:after,
+            header.major > h3:after,
+            header.main > h2:after {
+                display: none !important;
+            }
         </style>
     </head>
     <body class="is-preload">
