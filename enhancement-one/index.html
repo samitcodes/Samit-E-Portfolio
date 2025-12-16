@@ -8,6 +8,20 @@
 
     <!-- Prism.js CSS for syntax highlighting -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS to shrink code snippet -->
+    <style>
+        /* Shrink code snippet display */
+        code.language-java {
+            display: block;        /* make it block for styling */
+            font-size: 0.85em;     /* shrink text size */
+            max-height: 400px;     /* limit max height */
+            overflow: auto;        /* enable scrolling if too tall */
+            padding: 1em;
+            background-color: #2d2d2d;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body class="is-preload">
 
@@ -29,23 +43,30 @@
                     The artifact I have chosen for my ePortfolio is a mobile Weight Tracker application developed 
                     as part of my CS360 coursework. This application allows users to manage their weight over time 
                     by adding, updating, or removing entries through a simple, intuitive interface. The original version 
-                    focused on establishing reliable CRUD functionality, providing a foundation for enhancements that 
-                    improve both usability and functionality.
+                    focused on establishing reliable CRUD functionality, providing a solid foundation for enhancements 
+                    that improve both usability and functionality.
                 </p>
 
                 <p>
-                    I included this artifact because it demonstrates my technical skills in mobile application development, 
-                    problem-solving, and creating practical solutions for real-world challenges. A key enhancement I implemented 
-                    was the integration of a <strong>weight trend graph</strong>, which visually displays the user’s weight changes 
-                    over time. This transformed the app from a static data-entry system into a dynamic tool that allows users 
-                    to monitor progress and trends effectively. Implementing this feature required evaluating charting libraries, 
-                    adapting to platform-specific limitations, and learning to integrate third-party tools.
+                    I selected this artifact because it demonstrates my technical skills in mobile application development, 
+                    problem-solving, and designing solutions that address real-world needs. A significant enhancement I 
+                    implemented was the integration of a <strong>weight trend graph</strong>, which allows users to visualize 
+                    their weight changes over time. This enhancement transformed the application from a basic data-entry 
+                    system into a dynamic, user-centered tool, enabling users to track progress and identify trends.
                 </p>
 
                 <p>
-                    The `loadGrid()` method is central to this enhancement, as it retrieves weight entries from the database, 
-                    updates the GridView, and plots the weight trend graph using MPAndroidChart. This method demonstrates 
-                    my skills in data handling, UI updates, and chart integration:
+                    The process of implementing this graph required careful consideration of platform compatibility. Initially, 
+                    I experimented with Chart.js, a popular JavaScript charting library, but found it unsuitable for native 
+                    Android development. This challenge prompted me to research alternative solutions, leading me to adopt 
+                    MPAndroidChart. Learning to use this library involved studying official documentation, watching instructional 
+                    videos, and experimenting with datasets to correctly bind values to the graph.
+                </p>
+
+                <p>
+                    The <code>loadGrid()</code> method is central to this enhancement, as it retrieves weight entries from the database, 
+                    updates the GridView, and plots the weight trend graph. This method demonstrates my ability to handle 
+                    database operations, dynamically update the UI, and integrate third-party libraries:
                 </p>
 
                 <pre><code class="language-java">
@@ -99,18 +120,28 @@ private void loadGrid() {
                 </code></pre>
 
                 <p>
-                    By implementing this method, I learned how to efficiently connect database operations with real-time 
-                    UI updates and create a visual representation of data that enhances user experience. Challenges included 
-                    synchronizing the chart with data updates, formatting labels for readability, and ensuring smooth animation, 
-                    all of which strengthened my problem-solving and technical skills.
+                    Implementing this method taught me several valuable lessons. I learned how to synchronize database 
+                    updates with real-time UI changes, format chart labels for readability, and create smooth animations 
+                    that enhance user experience. I also developed problem-solving skills by navigating the limitations 
+                    of Chart.js, identifying a suitable alternative, and successfully integrating MPAndroidChart. 
+                    Peer feedback during testing informed improvements to the chart’s clarity, color scheme, and usability.
                 </p>
 
                 <p>
-                    This enhancement allowed me to fully meet course outcomes related to professional communication 
-                    through visual and technical forms, as well as the application of new methods and technologies to 
-                    solve computing problems. Other outcomes, such as advanced algorithmic analysis, remain to be addressed 
-                    in future enhancements. Overall, this artifact demonstrates my ability to independently learn new tools, 
-                    apply them practically, and add meaningful value to a software application.
+                    Beyond technical skills, this enhancement strengthened my ability to conduct independent research, 
+                    plan solutions, and iteratively test features to meet user needs. The artifact allowed me to fully 
+                    meet course outcomes related to professional communication through visual and technical forms, as well 
+                    as the application of new methods and technologies to solve computing problems. Outcomes such as 
+                    advanced algorithmic analysis remain partially met and will be addressed in future enhancements. 
+                    Overall, this artifact demonstrates my ability to create meaningful, user-centered software and reflects 
+                    growth as a software developer.
+                </p>
+
+                <p>
+                    Looking ahead, potential future enhancements could include predictive weight trend analysis, 
+                    personalized recommendations, and more advanced data visualizations. These improvements would not only 
+                    increase the value of the application but also provide further opportunities to demonstrate my technical 
+                    and analytical skills.
                 </p>
 
             </section>
