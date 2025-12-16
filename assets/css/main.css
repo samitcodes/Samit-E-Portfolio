@@ -2290,3 +2290,55 @@ button,
     border-top: 0;
     margin-top: 0;
     padding-top: 0; }
+
+/* === Enhancement Section Styling === */
+.enhancement-section article {
+    background-color: #f9f9f9 !important; /* Light grey background */
+    border-radius: 12px !important;       /* Rounded corners */
+    padding: 30px 25px !important;        /* Inner spacing */
+    margin: 0 auto 40px auto !important;  /* Center and space between */
+    max-width: 800px !important;          /* Limit width */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1) !important; /* Shadow */
+    transition: transform 0.3s, box-shadow 0.3s !important;
+}
+
+.enhancement-section article:hover {
+    transform: translateY(-5px) !important; /* Lift effect */
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15) !important;
+}
+
+.enhancement-section .icon {
+    font-size: 40px !important;
+    color: #007bff !important; /* Primary blue icon */
+    margin-bottom: 15px !important;
+    display: inline-block !important;
+}
+
+.enhancement-section h3 a {
+    color: #111 !important;
+    text-decoration: none !important;
+}
+
+.enhancement-section h3 a:hover {
+    color: #007bff !important;
+}
+
+.enhancement-section p {
+    color: #333 !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+}
+
+.enhancement-section .button {
+    background-color: #007bff !important;
+    color: #fff !important;
+    border-radius: 6px !important;
+    padding: 10px 20px !important;
+    text-decoration: none !important;
+    transition: background-color 0.3s !important;
+}
+
+.enhancement-section .button:hover {
+    background-color: #0056b3 !important;
+}
+
