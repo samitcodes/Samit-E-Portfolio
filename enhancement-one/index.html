@@ -22,12 +22,18 @@
             border-radius: 5px;
             margin: 1em 0;         /* space above and below snippet */
         }
+
+        /* Extra space below snippet paragraph */
+        .snippet-paragraph {
+            margin-bottom: 1.5em;
+        }
     </style>
 </head>
 <body class="is-preload">
 
 <div id="wrapper">
 
+    <!-- Main Content -->
     <div id="main">
         <div class="inner">
 
@@ -75,7 +81,7 @@
                     videos, and experimenting with datasets to correctly bind values to the graph.
                 </p>
 
-                <p>
+                <p class="snippet-paragraph">
                     The <code>loadGrid()</code> method is central to this enhancement, as it retrieves weight entries from the database, 
                     updates the GridView, and plots the weight trend graph. This method demonstrates my ability to handle 
                     database operations, dynamically update the UI, and integrate third-party libraries:
@@ -161,6 +167,27 @@ private void loadGrid() {
         </div>
     </div>
 
+    <!-- Sidebar Menu -->
+    <div id="sidebar">
+        <div class="inner">
+
+            <nav id="menu">
+                <header class="major">
+                    <h2>Menu</h2>
+                </header>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../codereview/">Code Review</a></li>
+                    <li><a href="../enhancement-one/">Enhancement One</a></li>
+                    <li><a href="../enhancement-two/">Enhancement Two</a></li>
+                    <li><a href="../enhancement-three/">Enhancement Three</a></li>
+                    <li><a href="../professional-self-assessment/">Professional Self Assessment</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
 </div>
 
 <!-- Prism.js for syntax highlighting -->
@@ -169,3 +196,4 @@ private void loadGrid() {
 
 </body>
 </html>
+
