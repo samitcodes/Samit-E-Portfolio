@@ -5,6 +5,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="../assets/css/main.css" />
+    <style>
+        /* Responsive video container */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body class="is-preload">
@@ -12,11 +30,11 @@
     <!-- Wrapper -->
     <div id="wrapper">
 
-        <!-- Main -->
+        <!-- Main Content -->
         <div id="main">
             <div class="inner">
 
-                <!-- Header (red line + name) -->
+                <!-- Header -->
                 <header id="header">
                     <a href="../index.html" class="logo">
                         <strong>Samit Datta</strong>
@@ -39,26 +57,24 @@
                     </ul>
                 </header>
 
-                <!-- Page Content -->
+                <!-- Code Review Section -->
                 <section>
                     <header class="main">
                         <h2>Code Review</h2>
                     </header>
 
                     <p>
-                        This video presents a detailed code review of Enhancement One,
-                        explaining the overall design, core functionality, and improvements
-                        made to ensure scalability, readability, and maintainability.
+                        This video provides a detailed walkthrough and code review of Enhancement One,
+                        explaining design decisions, implementation details, and improvements made
+                        to ensure scalability, readability, and maintainability.
                     </p>
 
-                    <!-- YouTube Video -->
+                    <!-- Embedded Local Video -->
                     <div class="video-container">
-                        <iframe
-                            src="https://www.youtube.com/embed/cMyzf16Nq4c"
-                            title="YouTube code review"
-                            frameborder="0"
-                            allowfullscreen>
-                        </iframe>
+                        <video controls preload="metadata">
+                            <source src="../videos/samit-datta-code-review.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </section>
 
@@ -98,5 +114,3 @@
 
 </body>
 </html>
-
-
