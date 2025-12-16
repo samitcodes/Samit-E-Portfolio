@@ -1,79 +1,97 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>Enhancement One</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="../assets/css/main.css" />
-    </head>
-    <body class="is-preload">
+<head>
+    <title>Enhancement One: Weight Trend Graph</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
 
-        <!-- Wrapper -->
-        <div id="wrapper">
+    <!-- Prism.js CSS for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
+</head>
+<body class="is-preload">
 
-            <!-- Main -->
-            <div id="main">
-                <div class="inner">
+<div id="wrapper">
 
-                    <!-- Header (red line + name) -->
-                    <header id="header">
-                        <a href="../index.html" class="logo"><strong>Samit Datta</strong></a>
-                        <ul class="icons">
-                            <li>
-                                <a href="https://github.com/samitcodes" class="icon brands fa-github" target="_blank">
-                                    <span class="label">GitHub</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/samitdattaofficial/" class="icon brands fa-linkedin" target="_blank">
-                                    <span class="label">LinkedIn</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </header>
+    <div id="main">
+        <div class="inner">
 
-                    <!-- Page Title -->
-                    <section>
-                        <header class="main">
-                            <h2>Enhancement One: Weight Trend Graph</h2>
-                        </header>
-                    </section>
+            <header id="header">
+                <a href="../index.html" class="logo"><strong>Samit Datta</strong></a>
+            </header>
 
-                    <!-- Main content intentionally left blank -->
+            <section>
+                <header class="main">
+                    <h2>Enhancement One: Weight Trend Graph</h2>
+                </header>
 
-                </div>
-            </div>
+                <p>
+                    The artifact I have chosen for my ePortfolio is a mobile Weight Tracker application developed 
+                    as part of my CS360 coursework. This application allows users to manage their weight over time 
+                    by adding, updating, or removing entries through a simple, intuitive interface. The original version 
+                    focused on establishing reliable CRUD functionality, providing a foundation for enhancements that 
+                    improve both usability and functionality.
+                </p>
 
-            <!-- Sidebar -->
-            <div id="sidebar">
-                <div class="inner">
+                <p>
+                    I included this artifact because it demonstrates my technical skills in mobile application development, 
+                    problem-solving, and creating practical solutions for real-world challenges. A key enhancement I implemented 
+                    was the integration of a <strong>weight trend graph</strong>, which visually displays the user’s weight changes 
+                    over time. This transformed the app from a static data-entry system into a dynamic tool that allows users 
+                    to monitor progress and trends effectively. Implementing this feature required evaluating charting libraries, 
+                    adapting to platform-specific limitations, and learning to integrate third-party tools.
+                </p>
 
-                    <!-- Custom Menu -->
-                    <nav id="menu">
-                        <header class="major">
-                            <h2>Menu</h2>
-                        </header>
-                        <ul>
-                            <li><a href="../index.html">Home</a></li>
-                            <li><a href="../codereview/">Code Review</a></li>
-                            <li><a href="../enhancement-one/">Enhancement One</a></li>
-                            <li><a href="../enhancement-two/">Enhancement Two</a></li>
-                            <li><a href="../enhancement-three/">Enhancement Three</a></li>
-                            <li><a href="../professional-self-assessment/">Professional Self Assessment</a></li>
-                        </ul>
-                    </nav>
+                <p>
+                    The following snippet demonstrates how I prepared and bound the dataset to the chart using MPAndroidChart, 
+                    enabling real-time visualization of user weight entries:
+                </p>
 
-                </div>
-            </div>
+                <pre><code class="language-java">
+// Prepare data entries for the chart
+ArrayList<Entry> entries = new ArrayList<>();
+for (int i = 0; i < weights.size(); i++) {
+    entries.add(new Entry(i, (float) weights.get(i)));
+}
+
+// Create and style the dataset
+LineDataSet dataSet = new LineDataSet(entries, "Weight Progress");
+dataSet.setColor(getResources().getColor(R.color.purple_500));
+dataSet.setLineWidth(2f);
+dataSet.setCircleRadius(4f);
+
+// Bind data to the chart and refresh
+LineData lineData = new LineData(dataSet);
+weightChart.setData(lineData);
+weightChart.invalidate();
+                </code></pre>
+
+                <p>
+                    This enhancement required addressing several challenges, including ensuring real-time updates 
+                    as new weight entries were added, formatting X-axis labels for readability, and overcoming initial 
+                    incompatibility issues with Chart.js. Through independent research, iterative testing, and consultation 
+                    of MPAndroidChart documentation, I successfully integrated the chart, creating a responsive and user-friendly interface. 
+                    Peer feedback during testing helped refine the graph’s clarity and overall usability.
+                </p>
+
+                <p>
+                    Through this process, I strengthened my skills in data visualization, UI design, integration of external libraries, 
+                    and problem-solving. The enhancement allowed me to fully meet course outcomes related to professional communication 
+                    through visual and technical forms and the application of new methods and technologies to solve computing problems. 
+                    While some outcomes, such as advanced algorithmic analysis, remain to be addressed in future enhancements, this artifact 
+                    demonstrates my ability to independently learn new tools, apply them practically, and add meaningful value to a software application.
+                </p>
+
+            </section>
 
         </div>
+    </div>
 
-        <!-- Scripts -->
-        <script src="../assets/js/jquery.min.js"></script>
-        <script src="../assets/js/browser.min.js"></script>
-        <script src="../assets/js/breakpoints.min.js"></script>
-        <script src="../assets/js/util.js"></script>
-        <script src="../assets/js/main.js"></script>
+</div>
 
-    </body>
+<!-- Prism.js for syntax highlighting -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
 </html>
