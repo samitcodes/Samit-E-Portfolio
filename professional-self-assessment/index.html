@@ -1,79 +1,98 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>Professional Self-Assessment</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="../assets/css/main.css" />
-        <style>
-            /* Black font styling */
-            body {
-                color: #000000;
-                font-family: Arial, sans-serif;
-                line-height: 1.6;
-            }
-            h2.enhancement-header {
-                color: #000000;
-                margin-bottom: 20px;
-            }
-            h3.enhancement-title {
-                color: #000000;
-                margin-top: 25px;
-            }
-            .enhancement {
-                background-color: #f9f9f9;
-                padding: 15px 20px;
-                border-left: 4px solid #0073e6;
-                margin-bottom: 20px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            }
-            p {
-                color: #000000;
-                margin-bottom: 15px;
-            }
-        </style>
-    </head>
-    <body class="is-preload">
+<head>
+    <title>Professional Self-Assessment</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
 
-        <!-- Wrapper -->
-        <div id="wrapper">
+    <!-- Optional: Prism.js CSS for syntax highlighting if needed later -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
 
-            <!-- Main -->
-            <div id="main">
-                <div class="inner">
+    <style>
+        p {
+            margin-bottom: 1em;
+        }
+        h2.main-header {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        h3.sub-header {
+            margin-top: 1.5em;
+            color: #34495e;
+        }
+        .enhancement {
+            background-color: #f4f4f4;
+            padding: 15px 20px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+        body {
+            color: #000000;
+            font-family: 'Arial', sans-serif;
+        }
+        a.button {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 6px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        a.button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body class="is-preload">
 
-                    <!-- Header (red line + name) -->
-                    <header id="header">
-                        <a href="../index.html" class="logo"><strong>Samit Datta</strong></a>
-                        <ul class="icons">
-                            <li><a href="https://github.com/samitcodes" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
-                            <li><a href="https://www.linkedin.com/in/samitdattaofficial/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-                        </ul>
-                    </header>
+<!-- Wrapper -->
+<div id="wrapper">
 
-                    <!-- Main Content: Integrating Technical Artifacts -->
-                    <h2 class="enhancement-header">Integrating My Technical Artifacts</h2>
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            <header id="header">
+                <a href="../index.html" class="logo"><strong>Samit Datta</strong></a>
+                <ul class="icons">
+                    <li><a href="https://github.com/samitcodes" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+                    <li><a href="https://www.linkedin.com/in/samitdattaofficial/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+                </ul>
+            </header>
+
+            <!-- Page Title -->
+            <section>
+                <header class="main">
+                    <h2 class="main-header">Professional Self-Assessment</h2>
+                </header>
+
+                <!-- Main Content -->
+                <div class="content">
 
                     <p>
                         This portfolio presents a series of technical artifacts that collectively demonstrate my skills and experience in computer science. Each artifact represents a deliberate enhancement to my Weight Tracker application, showcasing both technical proficiency and practical problem-solving.
                     </p>
 
                     <div class="enhancement">
-                        <h3 class="enhancement-title">Enhancement One – Weight Trend Graph</h3>
+                        <h3 class="sub-header">Enhancement One – Weight Trend Graph</h3>
                         <p>
                             Enhancement One features a weight trend graph, which allows users to visualize historical weight data over time. This demonstrates my ability to convert raw data into meaningful, actionable insights through clear and intuitive visualizations. By implementing graphing functionality, I applied knowledge of data structures, plotting libraries, and dynamic user interfaces, ensuring the feature is responsive and user-friendly.
                         </p>
                     </div>
 
                     <div class="enhancement">
-                        <h3 class="enhancement-title">Enhancement Two – Predictive Weight Trend</h3>
+                        <h3 class="sub-header">Enhancement Two – Predictive Weight Trend</h3>
                         <p>
                             Enhancement Two introduces a predictive weight trend, using historical data to project future weight trajectories. This highlights my understanding of predictive modeling, basic statistical analysis, and algorithm implementation. It shows how I can leverage existing data to generate valuable insights, helping users make informed decisions about their health and fitness goals.
                         </p>
                     </div>
 
                     <div class="enhancement">
-                        <h3 class="enhancement-title">Enhancement Three – Safe Delete and Backup System</h3>
+                        <h3 class="sub-header">Enhancement Three – Safe Delete and Backup System</h3>
                         <p>
                             Enhancement Three provides a safe delete and backup system for user history, ensuring that data can be removed without risk of permanent loss. This enhancement reflects attention to data integrity, error handling, and secure storage practices, demonstrating an understanding of both backend data management and the importance of user trust.
                         </p>
@@ -84,38 +103,38 @@
                     </p>
 
                 </div>
-            </div>
-
-            <!-- Sidebar -->
-            <div id="sidebar">
-                <div class="inner">
-
-                    <!-- Custom Menu -->
-                    <nav id="menu">
-                        <header class="major">
-                            <h2>Menu</h2>
-                        </header>
-                        <ul>
-                            <li><a href="../index.html">Home</a></li>
-                            <li><a href="../codereview/">Code Review</a></li>
-                            <li><a href="../enhancement-one/">Enhancement One</a></li>
-                            <li><a href="../enhancement-two/">Enhancement Two</a></li>
-                            <li><a href="../enhancement-three/">Enhancement Three</a></li>
-                            <li><a href="../conclusion/">Conclusion</a></li>
-                        </ul>
-                    </nav>
-
-                </div>
-            </div>
+            </section>
 
         </div>
+    </div>
 
-        <!-- Scripts -->
-        <script src="../assets/js/jquery.min.js"></script>
-        <script src="../assets/js/browser.min.js"></script>
-        <script src="../assets/js/breakpoints.min.js"></script>
-        <script src="../assets/js/util.js"></script>
-        <script src="../assets/js/main.js"></script>
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="inner">
+            <nav id="menu">
+                <header class="major">
+                    <h2>Menu</h2>
+                </header>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../codereview/">Code Review</a></li>
+                    <li><a href="../enhancement-one/">Enhancement One</a></li>
+                    <li><a href="../enhancement-two/">Enhancement Two</a></li>
+                    <li><a href="../enhancement-three/">Enhancement Three</a></li>
+                    <li><a href="../conclusion/">Conclusion</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 
-    </body>
+</div>
+
+<!-- HTML5 UP scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+
+</body>
 </html>
