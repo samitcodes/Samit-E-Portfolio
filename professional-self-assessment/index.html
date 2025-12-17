@@ -35,26 +35,28 @@
             overflow-x: auto;
         }
         body {
-            color: #000000; /* black font */
+            color: #000000;
         }
-        /* Optional: hover effect for outlined buttons */
-        .outlined-button:hover {
-            background-color: #3498db;
-            color: white;
-            transition: 0.3s;
+
+        /* Clean outlined button (no hover color changes) */
+        .outlined-button {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            border: 1px solid #3498db;
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: inline-block;
         }
     </style>
 </head>
 <body class="is-preload">
 
-<!-- Wrapper -->
 <div id="wrapper">
 
-    <!-- Main -->
     <div id="main">
         <div class="inner">
 
-            <!-- Header -->
             <header id="header">
                 <a href="../index.html" class="logo"><strong>Samit Datta</strong></a>
                 <ul class="icons">
@@ -63,16 +65,13 @@
                 </ul>
             </header>
 
-            <!-- Page Title -->
             <section>
                 <header class="main">
                     <h2 class="main-header">Professional Self-Assessment</h2>
                 </header>
 
-                <!-- Main Content -->
                 <div class="content">
 
-                    <!-- New Section Header -->
                     <h3>What to Expect:</h3>
 
                     <p>
@@ -83,14 +82,10 @@
                     <div class="enhancement">
                         <h3>Enhancement One – Weight Trend Graph</h3>
                         <p>
-                            Enhancement One features a weight trend graph, which allows users to visualize historical weight data over time. This demonstrates my ability to convert raw data into meaningful, actionable insights through clear and intuitive visualizations. By implementing graphing functionality, I applied knowledge of data structures, plotting libraries, and dynamic user interfaces, ensuring the feature is responsive and user-friendly.
+                            Enhancement One features a weight trend graph, which allows users to visualize historical weight data over time. This demonstrates my ability to convert raw data into meaningful, actionable insights through clear and intuitive visualizations.
                         </p>
-                        <!-- Centered outlined button -->
                         <div style="text-align: center; margin: 1.5em 0;">
-                            <a href="../enhancement-one/" 
-                               class="outlined-button" 
-                               style="text-decoration: none; color: #3498db; font-weight: bold; border: 1px solid #3498db; padding: 6px 12px; border-radius: 4px;"
-                               target="_blank" rel="noopener noreferrer">
+                            <a href="../enhancement-one/" class="outlined-button" target="_blank" rel="noopener noreferrer">
                                 View Enhancement One
                             </a>
                         </div>
@@ -100,14 +95,10 @@
                     <div class="enhancement">
                         <h3>Enhancement Two – Predictive Weight Trend</h3>
                         <p>
-                            Enhancement Two introduces a predictive weight trend, using historical data to project future weight trajectories. This highlights my understanding of predictive modeling, basic statistical analysis, and algorithm implementation. It shows how I can leverage existing data to generate valuable insights, helping users make informed decisions about their health and fitness goals.
+                            Enhancement Two introduces a predictive weight trend using historical data to project future trajectories, highlighting my understanding of predictive modeling and algorithm implementation.
                         </p>
-                        <!-- Centered outlined button -->
                         <div style="text-align: center; margin: 1.5em 0;">
-                            <a href="../enhancement-two/" 
-                               class="outlined-button" 
-                               style="text-decoration: none; color: #3498db; font-weight: bold; border: 1px solid #3498db; padding: 6px 12px; border-radius: 4px;"
-                               target="_blank" rel="noopener noreferrer">
+                            <a href="../enhancement-two/" class="outlined-button" target="_blank" rel="noopener noreferrer">
                                 View Enhancement Two
                             </a>
                         </div>
@@ -117,21 +108,17 @@
                     <div class="enhancement">
                         <h3>Enhancement Three – Safe Delete and Backup System</h3>
                         <p>
-                            Enhancement Three provides a safe delete and backup system for user history, ensuring that data can be removed without risk of permanent loss. This enhancement reflects attention to data integrity, error handling, and secure storage practices, demonstrating an understanding of both backend data management and the importance of user trust.
+                            Enhancement Three provides a safe delete and backup system for user history, reflecting attention to data integrity, error handling, and secure storage practices.
                         </p>
-                        <!-- Centered outlined button -->
                         <div style="text-align: center; margin: 1.5em 0;">
-                            <a href="../enhancement-three/" 
-                               class="outlined-button" 
-                               style="text-decoration: none; color: #3498db; font-weight: bold; border: 1px solid #3498db; padding: 6px 12px; border-radius: 4px;"
-                               target="_blank" rel="noopener noreferrer">
+                            <a href="../enhancement-three/" class="outlined-button" target="_blank" rel="noopener noreferrer">
                                 View Enhancement Three
                             </a>
                         </div>
                     </div>
 
                     <p>
-                        Together, these enhancements illustrate a comprehensive approach to software development, including data handling, algorithm design, visualization, user experience, and security considerations. They form a cohesive narrative that underscores my technical abilities, problem-solving strategies, and thoughtful design decisions. This portfolio not only presents functional artifacts but also provides insight into my process as a developer, highlighting how I combine technical knowledge with practical application to create meaningful software solutions.
+                        Together, these enhancements illustrate a comprehensive approach to software development, including data handling, visualization, user experience, and security considerations.
                     </p>
 
                 </div>
@@ -140,7 +127,6 @@
         </div>
     </div>
 
-    <!-- Sidebar -->
     <div id="sidebar">
         <div class="inner">
             <nav id="menu">
@@ -161,7 +147,6 @@
 
 </div>
 
-<!-- HTML5 UP scripts -->
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/browser.min.js"></script>
 <script src="../assets/js/breakpoints.min.js"></script>
