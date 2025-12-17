@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="../assets/css/main.css" />
 
-    <!-- Prism.js CSS for syntax highlighting -->
+    <!-- Prism.js CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
 
     <style>
@@ -28,10 +28,12 @@
         }
     </style>
 </head>
+
 <body class="is-preload">
 
 <div id="wrapper">
 
+    <!-- Main -->
     <div id="main">
         <div class="inner">
 
@@ -52,14 +54,15 @@
                 </ul>
             </header>
 
+            <!-- Page Title -->
             <section>
                 <header class="main">
                     <h2>Enhancement Three: Safe Delete Backup History</h2>
                 </header>
 
-                <!-- GitHub button -->
+                <!-- GitHub Button -->
                 <div class="github-button">
-                    <a href="https://github.com/samitcodes/WeightTrackerApp/tree/3610ef253906b345917ce0a64c86eed046fb0efc/Enhancement3"
+                    <a href="https://github.com/samitcodes/WeightTrackerApp"
                        class="button small"
                        target="_blank"
                        rel="noopener noreferrer">
@@ -68,83 +71,151 @@
                     </a>
                 </div>
 
+                <!-- Content -->
                 <div class="content">
 
                     <h3>Artifact Description</h3>
                     <p>
-                        This enhancement extends my original weight-tracking application from CS360 by introducing
-                        a safe-delete backup history system. Instead of permanently deleting user accounts and
-                        associated weight records, the system now applies a soft-deletion process that marks records
-                        as inactive while preserving them in the database.
+                        This enhancement extends my original weight tracking application from CS360 by implementing
+                        a safe-delete backup history system. Instead of permanently deleting user accounts and weight
+                        records, the system introduces a soft-deletion strategy that preserves data while preventing
+                        unauthorized access.
                     </p>
                     <p>
-                        When a user deletes their account, access is immediately revoked, but all historical data
-                        remains intact in its original state. This design supports recovery, auditing, and long-term
-                        data integrity while preventing unauthorized access. The enhancement demonstrates a secure
-                        data lifecycle approach rather than destructive data handling.
+                        When a deletion occurs, records are marked inactive rather than destroyed. This ensures that
+                        historical health data remains intact for recovery, auditing, and long-term system reliability,
+                        while enforcing strict access control for inactive users.
                     </p>
 
-                    <h3>Soft-Delete Database Design</h3>
+                    <h3>Database Versioning and Schema Migration</h3>
                     <p>
-                        The core of this enhancement is a deletion flag added to the database schema. Instead of
-                        removing rows, records are marked inactive and excluded from normal queries.
+                        To safely introduce soft deletion without impacting existing data, the database version
+                        was incremented and a controlled schema migration strategy was implemented.
                     </p>
 
-                    <pre><code class="language-sql">ALTER TABLE users ADD COLUMN is_deleted INTEGER DEFAULT 0;
-ALTER TABLE weights ADD COLUMN is_deleted INTEGER DEFAULT 0;</code></pre>
+                    <pre><code class="language-java">private static final int DATABASE_VERSION = 2;
 
-                    <h3>Account Deactivation Logic</h3>
-                    <p>
-                        When a user chooses to delete their account, the application updates the deletion flag
-                        instead of executing a destructive delete operation.
-                    </p>
-
-                    <pre><code class="language-java">public void softDeleteUser(int userId) {
-    SQLiteDatabase db = this.getWritableDatabase();
-    ContentValues values = new ContentValues();
-    values.put("is_deleted", 1);
-
-    db.update("users", values, "id = ?", new String[]{String.valueOf(userId)});
-    db.update("weights", values, "user_id = ?", new String[]{String.valueOf(userId)});
+@Override
+public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    if (oldVersion &lt; 2) {
+        db.execSQL("ALTER TABLE users ADD COLUMN is_deleted INTEGER DEFAULT 0");
+        db.execSQL("ALTER TABLE weights ADD COLUMN is_deleted INTEGER DEFAULT 0");
+    }
 }</code></pre>
 
-                    <h3>Access Control Enforcement</h3>
+                    <h3>User Account Soft Deletion</h3>
                     <p>
-                        The application prevents inactive users from authenticating by validating the deletion flag
-                        during login.
+                        When a user chooses to delete their account, the application does not remove the user record.
+                        Instead, it updates the deletion flag, immediately blocking authentication while preserving
+                        all associated data.
                     </p>
 
-                    <pre><code class="language-java">Cursor cursor = db.rawQuery(
-    "SELECT * FROM users WHERE username = ? AND password = ? AND is_deleted = 0",
-    new String[]{username, password}
-);</code></pre>
+                    <pre><code class="language-java">public boolean softDeleteUser(int userId) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    ContentValues cv = new ContentValues();
+    cv.put("is_deleted", 1);
+
+    int result = db.update(
+        "users",
+        cv,
+        "id = ?",
+        new String[]{String.valueOf(userId)}
+    );
+    return result &gt; 0;
+}</code></pre>
+
+                    <h3>Authentication Enforcement</h3>
+                    <p>
+                        Authentication logic explicitly excludes inactive accounts, ensuring that soft-deleted users
+                        cannot access the application even if valid credentials are provided.
+                    </p>
+
+                    <pre><code class="language-java">public boolean checkUser(String username, String password) {
+    SQLiteDatabase db = this.getReadableDatabase();
+    Cursor cursor = db.query(
+        "users",
+        new String[]{"id"},
+        "username = ? AND password = ? AND is_deleted = 0",
+        new String[]{username, password},
+        null, null, null
+    );
+    boolean exists = cursor.getCount() &gt; 0;
+    cursor.close();
+    return exists;
+}</code></pre>
+
+                    <h3>Soft Deletion of Weight Records</h3>
+                    <p>
+                        Individual weight entries can also be safely deleted. This allows users to recover accidental
+                        deletions while maintaining data integrity.
+                    </p>
+
+                    <pre><code class="language-java">public boolean softDeleteWeight(int id, int userId) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    ContentValues cv = new ContentValues();
+    cv.put("is_deleted", 1);
+
+    int result = db.update(
+        "weights",
+        cv,
+        "id = ? AND user_id = ?",
+        new String[]{String.valueOf(id), String.valueOf(userId)}
+    );
+    return result &gt; 0;
+}</code></pre>
+
+                    <h3>Recovery of Deleted Records</h3>
+                    <p>
+                        The backup history feature allows previously deleted records to be restored instantly without
+                        requiring data migration or secondary storage systems.
+                    </p>
+
+                    <pre><code class="language-java">public boolean recoverWeight(int id, int userId) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    ContentValues cv = new ContentValues();
+    cv.put("is_deleted", 0);
+
+    int result = db.update(
+        "weights",
+        cv,
+        "id = ? AND user_id = ?",
+        new String[]{String.valueOf(id), String.valueOf(userId)}
+    );
+    return result &gt; 0;
+}</code></pre>
+
+                    <h3>Permanent Deletion as a Controlled Operation</h3>
+                    <p>
+                        Permanent deletion is intentionally separated from standard delete operations and requires
+                        explicit user intent, minimizing the risk of irreversible data loss.
+                    </p>
+
+                    <pre><code class="language-java">public boolean permanentDeleteWeight(int id, int userId) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    int result = db.delete(
+        "weights",
+        "id = ? AND user_id = ?",
+        new String[]{String.valueOf(id), String.valueOf(userId)}
+    );
+    return result &gt; 0;
+}</code></pre>
 
                     <h3>Justification for Inclusion</h3>
                     <p>
-                        This artifact was selected for the database category because it demonstrates secure data
-                        handling for sensitive health information. Weight records require confidentiality,
-                        integrity, and availability, all of which are supported through controlled access and
-                        non-destructive operations.
-                    </p>
-                    <p>
-                        The enhancement shows that databases are not merely storage systems but enforce business
-                        logic, prevent invalid operations, and protect against accidental or malicious data loss.
-                        The soft-delete design reflects real-world database engineering practices used in
-                        production systems.
+                        This artifact was selected to demonstrate secure database design for sensitive health data.
+                        The enhancement highlights access control, data lifecycle management, and defensive
+                        programming practices required in real-world systems.
                     </p>
 
                     <h3>Reflection</h3>
                     <p>
-                        Initially, I considered using a separate backup database. After evaluating the complexity
-                        and risk of data inconsistency across systems, I recognized that a soft-delete approach
-                        provided a safer and more efficient solution. Maintaining a single source of truth reduced
-                        the likelihood of corruption while enabling immediate recovery.
+                        Initially, I considered using a secondary backup database. However, this approach increased
+                        complexity and risk of data inconsistency. The soft-delete strategy provided a safer and more
+                        efficient solution with immediate recovery and no data duplication.
                     </p>
                     <p>
-                        The most challenging aspect was ensuring that inactive users were completely blocked from
-                        system access without impacting stored data. This enhancement strengthened my understanding
-                        of defensive database design and reinforced that well-planned simplicity often offers
-                        greater security than complex redundancy.
+                        This enhancement reinforced the importance of preventative database design, showing that
+                        simple, well-structured logic can provide stronger security than complex redundancy.
                     </p>
 
                 </div>
@@ -174,11 +245,11 @@ ALTER TABLE weights ADD COLUMN is_deleted INTEGER DEFAULT 0;</code></pre>
 
 </div>
 
-<!-- Prism.js scripts -->
+<!-- Prism.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
 
-<!-- HTML5 UP scripts -->
+<!-- HTML5 UP -->
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/browser.min.js"></script>
 <script src="../assets/js/breakpoints.min.js"></script>
@@ -187,4 +258,3 @@ ALTER TABLE weights ADD COLUMN is_deleted INTEGER DEFAULT 0;</code></pre>
 
 </body>
 </html>
-
