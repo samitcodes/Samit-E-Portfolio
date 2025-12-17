@@ -202,20 +202,42 @@ public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
                     <h3>Justification for Inclusion</h3>
                     <p>
-                        This artifact was selected to demonstrate secure database design for sensitive health data.
-                        The enhancement highlights access control, data lifecycle management, and defensive
-                        programming practices required in real-world systems.
+                        The safe delete backup history was ideal for this because it manages
+                        sensitive health-related data that requires a higher standard of security and reliability
+                        than typical application data. Weight records are inherently personal and confidential,
+                        making the principles of confidentiality, integrity, and availability critical to the
+                        system’s design.
+                    </p>
+                    <p>
+                        This enhancement demonstrates that databases are not merely passive storage components,
+                        but active enforcers of application logic and security constraints. Through the use of
+                        soft deletion, filtered queries, and well-defined table relationships, the database
+                        prevents unauthorized access, invalid operations, and accidental data loss. These design
+                        decisions highlight my ability to implement secure, scalable database solutions that
+                        support long-term system reliability and responsible data management.
                     </p>
 
                     <h3>Reflection</h3>
                     <p>
-                        Initially, I considered using a secondary backup database. However, this approach increased
-                        complexity and risk of data inconsistency. The soft-delete strategy provided a safer and more
-                        efficient solution with immediate recovery and no data duplication.
+                        During the development of this enhancement, my initial approach was to introduce a
+                        secondary database to serve as a backup storage system. However, after evaluating the
+                        complexity of synchronizing multiple databases, I recognized that this solution would
+                        introduce unnecessary risk and inefficiency. Data replication increases the likelihood
+                        of inconsistencies, corruption, and system failures, particularly in applications that
+                        require frequent updates.
                     </p>
                     <p>
-                        This enhancement reinforced the importance of preventative database design, showing that
-                        simple, well-structured logic can provide stronger security than complex redundancy.
+                        This enchancement enables immediate recovery,
+                        eliminates the need for data migration, and avoids the overhead of managing redundant
+                        storage systems. One of the most challenging aspects of this enhancement was ensuring
+                        that inactive users were fully restricted from accessing the application while preserving
+                        all historical data.
+                    </p>
+                    <p>
+                        This experience strengthened my understanding of effective database design by emphasizing
+                        prevention, recoverability, and controlled access over destructive operations. It
+                        reinforced the idea that simple, well-structured architecture often provides stronger
+                        security and reliability than complex redundancy, especially in real-world applications.
                     </p>
 
                 </div>
