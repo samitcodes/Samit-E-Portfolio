@@ -1,256 +1,190 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>Enhancement Three</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="../assets/css/main.css" />
-        <style>
-            pre {
-                background: #f4f4f4;
-                padding: 1em;
-                overflow-x: auto;
-                border-radius: 6px;
-            }
-            code {
-                font-family: Consolas, monospace;
-            }
-            section {
-                margin-bottom: 3em;
-            }
-            /* Remove section divider lines from headers */
-            header.main {
-                border-bottom: none !important;
-            }
-            header.major > h2:after,
-            header.major > h3:after,
-            header.main > h2:after {
-                display: none !important;
-            }
-        </style>
-    </head>
-    <body class="is-preload">
+<head>
+    <title>Enhancement Three: Safe Delete Backup History</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
 
-        <!-- Wrapper -->
-        <div id="wrapper">
+    <!-- Prism.js CSS for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
 
-            <!-- Main -->
-            <div id="main">
-                <div class="inner">
+    <style>
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+        p {
+            margin-bottom: 1em;
+        }
+        h3 {
+            margin-top: 1.5em;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body class="is-preload">
 
-                    <!-- Header (red line + name) -->
-                    <header id="header">
-                        <a href="../index.html" class="logo"><strong>Samit Datta</strong></a>
-                        <ul class="icons">
-                            <li>
-                                <a href="https://github.com/samitcodes" class="icon brands fa-github" target="_blank">
-                                    <span class="label">GitHub</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/samitdattaofficial/" class="icon brands fa-linkedin" target="_blank">
-                                    <span class="label">LinkedIn</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </header>
+<div id="wrapper">
 
-                    <!-- Page Title -->
-                    <section>
-                        <header class="main">
-                            <h2>Enhancement Three: Safe Delete Backup History</h2>
-                        </header>
-                    </section>
+    <div id="main">
+        <div class="inner">
 
-                    <!-- Artifact Description -->
-                    <section>
-                        <header class="main">
-                            <h3>Artifact Description</h3>
-                        </header>
-                        <p>
-                            In continuation of my Weight Tracker application originally developed in CS-360,
-                            my third enhancement introduces a <strong>safe-delete backup history system</strong>.
-                            This enhancement implements a soft-deletion process that prevents irreversible
-                            removal of user accounts and weight records. Instead of permanently deleting data,
-                            the system marks records as inactive using a deletion flag, restricting access while
-                            preserving the original data.
-                        </p>
-                        <p>
-                            When a user deletes an account, the system disables access to that account and hides
-                            its associated records from active queries, but the information remains intact within
-                            the database. This enhancement demonstrates secure data lifecycle management and
-                            responsible database design.
-                        </p>
-                    </section>
+            <!-- Header -->
+            <header id="header">
+                <a href="../index.html" class="logo"><strong>Samit Datta</strong></a>
+                <ul class="icons">
+                    <li>
+                        <a href="https://github.com/samitcodes" class="icon brands fa-github" target="_blank">
+                            <span class="label">GitHub</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/samitdattaofficial/" class="icon brands fa-linkedin" target="_blank">
+                            <span class="label">LinkedIn</span>
+                        </a>
+                    </li>
+                </ul>
+            </header>
 
-                    <!-- Database Versioning -->
-                    <section>
-                        <p>
-                            To safely introduce soft-delete functionality, the database version was incremented
-                            and schema changes were applied using controlled upgrades. This ensured backward
-                            compatibility while preserving all existing user data.
-                        </p>
-                        <pre><code>private static final int DATABASE_VERSION = 2;
-// Incremented to support soft-delete functionality</code></pre>
+            <section>
+                <header class="main">
+                    <h2>Enhancement Three: Safe Delete Backup History</h2>
+                </header>
 
-                        <pre><code>@Override
-public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-    if (oldVersion < 2) {
-        db.execSQL("ALTER TABLE users ADD COLUMN is_deleted INTEGER DEFAULT 0");
-        db.execSQL("ALTER TABLE weights ADD COLUMN is_deleted INTEGER DEFAULT 0");
-    }
-}</code></pre>
-                    </section>
+                <!-- GitHub button -->
+                <div class="github-button">
+                    <a href="https://github.com/samitcodes/WeightTrackerApp/tree/3610ef253906b345917ce0a64c86eed046fb0efc/Enhancement3"
+                       class="button small"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <i class="fab fa-github" style="margin-right: 0.5em;"></i>
+                        Enhancement Three Repository
+                    </a>
+                </div>
 
-                    <!-- Justification -->
-                    <section>
-                        <header class="main">
-                            <h3>Justification for Inclusion</h3>
-                        </header>
-                        <p>
-                            This artifact was selected under the databases category because health-related
-                            data requires a higher level of security and responsibility. Weight records are
-                            personal and confidential, making confidentiality, integrity, and availability
-                            critical concerns.
-                        </p>
-                        <p>
-                            This enhancement demonstrates that databases are not merely storage mechanisms,
-                            but active components responsible for enforcing logic, preventing invalid
-                            operations, and protecting user data from loss or corruption.
-                        </p>
-                    </section>
+                <div class="content">
 
-                    <!-- Table Design -->
-                    <section>
-                        <p>
-                            To support non-destructive deletion while maintaining relational integrity,
-                            the weights table was redesigned to include a deletion flag.
-                        </p>
-                        <pre><code>String createWeights = "CREATE TABLE weights (" +
-        "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-        "user_id INTEGER, " +
-        "date TEXT, " +
-        "weight REAL, " +
-        "is_deleted INTEGER DEFAULT 0, " +
-        "FOREIGN KEY(user_id) REFERENCES users(id))";</code></pre>
-                    </section>
+                    <h3>Artifact Description</h3>
+                    <p>
+                        This enhancement extends my original weight-tracking application from CS360 by introducing
+                        a safe-delete backup history system. Instead of permanently deleting user accounts and
+                        associated weight records, the system now applies a soft-deletion process that marks records
+                        as inactive while preserving them in the database.
+                    </p>
+                    <p>
+                        When a user deletes their account, access is immediately revoked, but all historical data
+                        remains intact in its original state. This design supports recovery, auditing, and long-term
+                        data integrity while preventing unauthorized access. The enhancement demonstrates a secure
+                        data lifecycle approach rather than destructive data handling.
+                    </p>
 
-                    <!-- Soft Delete Logic -->
-                    <section>
-                        <p>
-                            Instead of permanently deleting records, the application marks them as inactive
-                            using a soft-delete strategy. This approach prevents irreversible data loss while
-                            still removing deleted entries from the active user interface.
-                        </p>
-                        <pre><code>public boolean softDeleteWeight(int id, int userId) {
+                    <h3>Soft-Delete Database Design</h3>
+                    <p>
+                        The core of this enhancement is a deletion flag added to the database schema. Instead of
+                        removing rows, records are marked inactive and excluded from normal queries.
+                    </p>
+
+                    <pre><code class="language-sql">ALTER TABLE users ADD COLUMN is_deleted INTEGER DEFAULT 0;
+ALTER TABLE weights ADD COLUMN is_deleted INTEGER DEFAULT 0;</code></pre>
+
+                    <h3>Account Deactivation Logic</h3>
+                    <p>
+                        When a user chooses to delete their account, the application updates the deletion flag
+                        instead of executing a destructive delete operation.
+                    </p>
+
+                    <pre><code class="language-java">public void softDeleteUser(int userId) {
     SQLiteDatabase db = this.getWritableDatabase();
-    ContentValues cv = new ContentValues();
-    cv.put("is_deleted", 1);
+    ContentValues values = new ContentValues();
+    values.put("is_deleted", 1);
 
-    int result = db.update(
-            TABLE_WEIGHTS,
-            cv,
-            "id=? AND user_id=?",
-            new String[]{String.valueOf(id), String.valueOf(userId)}
-    );
-    return result > 0;
+    db.update("users", values, "id = ?", new String[]{String.valueOf(userId)});
+    db.update("weights", values, "user_id = ?", new String[]{String.valueOf(userId)});
 }</code></pre>
-                    </section>
 
-                    <!-- Query Filtering -->
-                    <section>
-                        <p>
-                            All user-facing queries explicitly filter out deleted records to ensure that
-                            inactive data remains inaccessible while still being preserved in the database.
-                        </p>
-                        <pre><code>public Cursor getWeightsByUser(int userId) {
-    SQLiteDatabase db = this.getReadableDatabase();
-    return db.rawQuery(
-            "SELECT * FROM weights WHERE user_id=? AND is_deleted=0",
-            new String[]{String.valueOf(userId)}
-    );
-}</code></pre>
-                    </section>
+                    <h3>Access Control Enforcement</h3>
+                    <p>
+                        The application prevents inactive users from authenticating by validating the deletion flag
+                        during login.
+                    </p>
 
-                    <!-- Recovery -->
-                    <section>
-                        <p>
-                            Deleted records can be restored instantly by resetting the deletion flag,
-                            allowing for immediate recovery without data migration or duplication.
-                        </p>
-                        <pre><code>public boolean recoverWeight(int id, int userId) {
-    SQLiteDatabase db = this.getWritableDatabase();
-    ContentValues cv = new ContentValues();
-    cv.put("is_deleted", 0);
+                    <pre><code class="language-java">Cursor cursor = db.rawQuery(
+    "SELECT * FROM users WHERE username = ? AND password = ? AND is_deleted = 0",
+    new String[]{username, password}
+);</code></pre>
 
-    int result = db.update(
-            TABLE_WEIGHTS,
-            cv,
-            "id=? AND user_id=?",
-            new String[]{String.valueOf(id), String.valueOf(userId)}
-    );
-    return result > 0;
-}</code></pre>
-                    </section>
+                    <h3>Justification for Inclusion</h3>
+                    <p>
+                        This artifact was selected for the database category because it demonstrates secure data
+                        handling for sensitive health information. Weight records require confidentiality,
+                        integrity, and availability, all of which are supported through controlled access and
+                        non-destructive operations.
+                    </p>
+                    <p>
+                        The enhancement shows that databases are not merely storage systems but enforce business
+                        logic, prevent invalid operations, and protect against accidental or malicious data loss.
+                        The soft-delete design reflects real-world database engineering practices used in
+                        production systems.
+                    </p>
 
-                    <!-- Course Outcomes -->
-                    <section>
-                        <h3>Course Outcomes Assessment</h3>
-                        <p>
-                            This enhancement met the planned course outcomes by applying database concepts
-                            to implement secure data management practices and system-level safeguards.
-                        </p>
-                    </section>
-
-                    <!-- Reflection -->
-                    <section>
-                        <h3>Reflection</h3>
-                        <p>
-                            Initially, I considered implementing a secondary database as a backup solution.
-                            However, maintaining synchronization across multiple databases introduced
-                            unnecessary complexity and risk. The soft-delete approach provided a safer and
-                            more efficient alternative.
-                        </p>
-                        <p>
-                            This enhancement reinforced the importance of thoughtful database design and
-                            showed that simple, well-structured solutions often provide stronger security
-                            and reliability than complex redundancy mechanisms.
-                        </p>
-                    </section>
+                    <h3>Reflection</h3>
+                    <p>
+                        Initially, I considered using a separate backup database. After evaluating the complexity
+                        and risk of data inconsistency across systems, I recognized that a soft-delete approach
+                        provided a safer and more efficient solution. Maintaining a single source of truth reduced
+                        the likelihood of corruption while enabling immediate recovery.
+                    </p>
+                    <p>
+                        The most challenging aspect was ensuring that inactive users were completely blocked from
+                        system access without impacting stored data. This enhancement strengthened my understanding
+                        of defensive database design and reinforced that well-planned simplicity often offers
+                        greater security than complex redundancy.
+                    </p>
 
                 </div>
-            </div>
-
-            <!-- Sidebar -->
-            <div id="sidebar">
-                <div class="inner">
-
-                    <!-- Custom Menu -->
-                    <nav id="menu">
-                        <header class="major">
-                            <h2>Menu</h2>
-                        </header>
-                        <ul>
-                            <li><a href="../index.html">Home</a></li>
-                            <li><a href="../codereview/">Code Review</a></li>
-                            <li><a href="../enhancement-one/">Enhancement One</a></li>
-                            <li><a href="../enhancement-two/">Enhancement Two</a></li>
-                            <li><a href="../enhancement-three/">Enhancement Three</a></li>
-                            <li><a href="../professional-self-assessment/">Professional Self Assessment</a></li>
-                        </ul>
-                    </nav>
-
-                </div>
-            </div>
+            </section>
 
         </div>
+    </div>
 
-        <!-- Scripts -->
-        <script src="../assets/js/jquery.min.js"></script>
-        <script src="../assets/js/browser.min.js"></script>
-        <script src="../assets/js/breakpoints.min.js"></script>
-        <script src="../assets/js/util.js"></script>
-        <script src="../assets/js/main.js"></script>
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="inner">
+            <nav id="menu">
+                <header class="major">
+                    <h2>Menu</h2>
+                </header>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../codereview/">Code Review</a></li>
+                    <li><a href="../enhancement-one/">Enhancement One</a></li>
+                    <li><a href="../enhancement-two/">Enhancement Two</a></li>
+                    <li><a href="../enhancement-three/">Enhancement Three</a></li>
+                    <li><a href="../professional-self-assessment/">Professional Self Assessment</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 
-    </body>
+</div>
+
+<!-- Prism.js scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+<!-- HTML5 UP scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+
+</body>
 </html>
+
